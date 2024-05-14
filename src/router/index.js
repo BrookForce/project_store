@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,20 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    }
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/RegisterView.vue')
+    }
+  },
+  {
+    path: '/sign-in',
+    name: 'sign-in',
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/signinView.vue')
     }
   }
 ]
