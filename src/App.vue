@@ -4,31 +4,64 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/register">Register</router-link> |
-      <router-link to="/sign-in">Login</router-link>
+      <router-link to="/sign-in">Login </router-link> |
+      <button @click="handleSignOut" v-if="isLoggedIn">Sign Out</button>
     </nav>
     <router-view/>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import { auth, onAuthStateChanged } from './firebase';
+
+export default {
+  data() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  created() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
+  },
+  methods: {
+    async handleSignOut() {
+      try {
+        await auth.signOut();
+        this.isLoggedIn = false;
+      } catch (error) {
+        console.error("Error signing out: ", error);
+      }
+    },
+  },
+};
+</script>
+<style scoped>
+nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #f8f9fa;
+  padding: 1em;
+  width: 100%;
 }
 
-nav {
-  padding: 30px;
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 2em;
 }
 
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+  text-decoration: none;
+  color: #333;
 }
 </style>
