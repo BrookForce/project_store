@@ -1,0 +1,30 @@
+/* Temas gerais */
+:root {
+    --background-color-light: #ffffff;
+    --text-color-light: #000000;
+    --background-color-dark: #333333;
+    --text-color-dark: #ffffff;
+  }
+  
+  body.light-theme {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+  }
+  
+  body.dark-theme {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+  }
+  
+  /* Component styles */
+  .navbar {
+    padding: 1em;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+  }
+  
+  body.dark-theme .navbar {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+  }
+  
